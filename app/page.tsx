@@ -6,11 +6,12 @@ export default function Home() {
   const [heroTitle, setHeroTitle] = useState("Loading...");
 
   useEffect(() => {
-    fetch("http://localhost:1337/api/heroes")
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/api/heroes`;
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        if (data?.data?.length > 0) setHeroTitle(data.data[0].title);
-        else setHeroTitle("No title found");
+        const title = data?.data?.[0]?.attributes?.title;
+        setHeroTitle(title || "No title found");
       })
       .catch(() => setHeroTitle("Error loading title"));
   }, []);
@@ -42,7 +43,7 @@ export default function Home() {
               </a>
             </nav>
             <button className="bg-primary text-black px-4 py-2 rounded-full font-semibold flex items-center gap-2 transform hover:scale-105 transition-transform duration-300">
-              <span>Let's talk</span>
+              <span>Let&apos;s talk</span>
               <span className="material-icons">arrow_forward</span>
             </button>
           </div>
@@ -60,7 +61,7 @@ export default function Home() {
         </div>
         <div className="container mx-auto px-6 z-10">
           <div className="max-w-2xl">
-            {/* Заголовок берём из Strapi */}
+            {/* Заголовок из Strapi */}
             <h1 className="text-6xl md:text-8xl font-bold leading-tight animate-fadeInUp">
               {heroTitle}
             </h1>
@@ -70,7 +71,7 @@ export default function Home() {
               style={{ animationDelay: "0.3s" }}
             >
               Welcome to our world of creative excellence and innovative
-              solutions. We're a team of passionate designers, developers, and
+              solutions. We&apos;re a team of passionate designers, developers, and
               strategists dedicated to crafting unique brand experiences.
             </p>
             <div
@@ -140,13 +141,13 @@ export default function Home() {
           </div>
           <div className="relative">
             <img
-              alt="A designer's workspace"
+              alt="A designer&apos;s workspace with sketches and tools"
               className="rounded-lg shadow-lg w-full"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIjbIyoA0CEPf9fazJTZwY5wjCt0Ca0O-BZbJUoL4UJxDtE82szdAocA68vdffhNahyJPwaMM5Q7ROhXG4lpDgyFKXC5uawH1lGP1PGy4oNWm8S0FDPYln3fZdFnkO0BfpiVjO5twlBlyW3YbGJVjCG2q0l8Oclfc1s9noHm2faT7ZDUQFCB6WxD-9nxqO9WW3idOxwMJ9pO9ajTzXffiQwW7f7Wzz5X_gnFe9mtAWNKFC5AKmbX9-ook-Hyu35FcENpzQ5SMltKPM"
             />
             <div className="absolute -bottom-8 -left-8 bg-background-light dark:bg-background-dark p-4 rounded-lg shadow-lg max-w-xs">
               <p className="text-sm">
-                "Professionals focused on helping your brand grow and succeed."
+                &quot;Professionals focused on helping your brand grow and succeed.&quot;
               </p>
             </div>
           </div>
@@ -167,24 +168,16 @@ export default function Home() {
           </div>
           <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="border-t-2 border-primary pt-6">
-              <h3 className="text-xl font-semibold">
-                Branding and Identity Design
-              </h3>
+              <h3 className="text-xl font-semibold">Branding and Identity Design</h3>
             </div>
             <div className="border-t-2 border-primary pt-6">
-              <h3 className="text-xl font-semibold">
-                Website Design and Development
-              </h3>
+              <h3 className="text-xl font-semibold">Website Design and Development</h3>
             </div>
             <div className="border-t-2 border-primary pt-6">
-              <h3 className="text-xl font-semibold">
-                Advertising and Marketing Campaigns
-              </h3>
+              <h3 className="text-xl font-semibold">Advertising and Marketing Campaigns</h3>
             </div>
             <div className="border-t-2 border-primary pt-6">
-              <h3 className="text-xl font-semibold">
-                Creative and Cultural Development
-              </h3>
+              <h3 className="text-xl font-semibold">Creative and Cultural Development</h3>
             </div>
           </div>
         </div>
@@ -196,11 +189,11 @@ export default function Home() {
           <div>
             <h2 className="text-5xl font-bold">Meet Our Team</h2>
             <p className="mt-6 text-gray-600 dark:text-gray-300">
-              We are a close-knit team of creative thinkers, problem solvers,
-              and tech enthusiasts. We bring a diverse range of skills and
-              backgrounds to the table, allowing us to tackle any challenge with
-              a fresh perspective. Our collaborative approach ensures we deliver
-              comprehensive and innovative solutions that exceed expectations.
+              We are a close-knit team of creative thinkers, problem solvers, and tech
+              enthusiasts. We bring a diverse range of skills and backgrounds to the
+              table, allowing us to tackle any challenge with a fresh perspective. Our
+              collaborative approach ensures we deliver comprehensive and innovative
+              solutions that exceed expectations.
             </p>
             <div className="mt-8 flex items-center space-x-6">
               <button className="bg-primary text-black px-8 py-3 rounded-full font-bold flex items-center gap-2 transform hover:scale-105 transition-transform duration-300">
@@ -214,22 +207,22 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <img
-              alt="Team member"
+              alt="Team member photo"
               className="rounded-lg shadow-lg"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcGZ1FqmxDGfRJKosujxmgdT_-29e0AfiQrtpwc13Q762VaTDeSRvzbIMv4M6kOfgrcPlG59MOTqmMUiY7xrUMO5rn9T2H41LK70yZLD517ooZRzwHKeXY9VzdTL1LdpyeO83f8nQCJDfiEiLERrwDU3aOG9uCP7B8lty8tp5Jp0yCP5OvCw-3m3O6uKm2sgVztc_dSLCUnBY5yXBpNuWP4HE1AoU1EuZwqIRbM4V1MMQh_0gOUM_rgTtNgHt5ZDKtHgMgAOSXoJuP"
             />
             <img
-              alt="Team member"
+              alt="Team member photo"
               className="rounded-lg shadow-lg"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9ctmmIvs1QJaWAzgba09THA_Nv_IGrDkpl8Rsjf82xIGQ3Qtw6E4DFogsyhivs7imn-HhXnsvlaUGX1gqabfxD9gh1Al5jxUHJr7jkoIze5nqjEQJx5QG6nso3HUg-9lGLIBoyVOnjw2EY1xuJ7MgtH-UqZxjLNbhWchzNkwYmVrPrzzNVattEgDrTm4VWз7Wkba3kxmREw6PPNygDGhl-l3SqRSbq0eHCRsXRhEwnQgfaY3QvdB40xfKxRMumJUrREeLvN9RJ0P"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9ctmmIvs1QJaWAzgba09THA_Nv_IGrDkpl8Rsjf82xIGQ3Qtw6E4DFogsyhivs7imn-HhXnsvlaUGX1gqabfxD9gh1Al5jxUHJr7jkoIze5nqjEQJx5QG6nso3HUg-9lGLIBoyVOnjw2EY1xuJ7MgtH-UqZxjLNbhWchzNkwYmVrPrzzNVattEgDrTm4VW7Wkba3kxmREw6PPNygDGhl-l3SqRSbq0eHCRsXRhEwnQgfaY3QvdB40xfKxRMumJUrREeLvN9RJ0P"
             />
             <img
-              alt="Team member"
+              alt="Team member photo"
               className="rounded-lg shadow-lg"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl7xZfLSFWs1зBr50bx5X5yD75rJPQDaPDMRj9jraAqURHmQ7mdYYg8oi_Cw1YaqQeAD5VdtdbXABsooWOswiQYT69PoK1fydXooclwbktwsxt1QKfOBYyqvrJq0qP_QqOeaCKLCCn20ixOCOZU57kw7QDfbtg0QxI8C4YhkfZkcRT63mQRqwxJA0VyZpriXWi_Wz4acR1Dbtbn26OlsXVISqYjoZfpDC_hb69pK4QE4YsOEPw_bqeFQO24VU0h2HfZ4GJwBmWBLVc"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl7xZfLSFWs1zBr50bx5X5yD75rJPQDaPDMRj9jraAqURHmQ7mdYYg8oi_Cw1YaqQeAD5VdtdbXABsooWOswiQYT69PoK1fydXooclwbktwsxt1QKfOBYyqvrJq0qP_QqOeaCKLCCn20ixOCOZU57kw7QDfbtg0QxI8C4YhkfZkcRT63mQRqwxJA0VyZpriXWi_Wz4acR1Dbtbn26OlsXVISqYjoZfpDC_hb69pK4QE4YsOEPw_bqeFQO24VU0h2HfZ4GJwBmWBLVc"
             />
             <img
-              alt="Team member"
+              alt="Team member photo"
               className="rounded-lg shadow-lg"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH7QFXZz8fVvBk5OH2owCZQKVtFj_ds8KKzJpHeB3QbNeOtJEISVBEJePrAAsCyusQ1AJU-Y3S7OtpCPImMEk5NVWkY_hxjWS85WP7xCFcFWlBj4YxOGFLTfZI3fGRU8iU_SHKaJsqn1RTVff1cef9oYHoxcOZnCFxpjlkItVF2jhwOJXvzQIvuYHVrpGX_ED1hllXatmLpB4bwszB_EuEnCC65FjspLGFjZkisljDRKA81uJCN4w_lrLqCWMf6YuS8WcY9XDKNtiY"
             />
@@ -243,9 +236,7 @@ export default function Home() {
           <p className="text-sm text-gray-500 dark:text-gray-400">
             Customer reviews are a valuable source
           </p>
-          <h2 className="text-5xl font-bold mt-2">
-            Customer Voices: Hear What They Say!
-          </h2>
+          <h2 className="text-5xl font-bold mt-2">Customer Voices: Hear What They Say!</h2>
           <div className="mt-12 flex justify-center items-center space-x-4">
             <button className="p-2 rounded-full border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
               <span className="material-icons">arrow_back</span>
@@ -264,33 +255,31 @@ export default function Home() {
               <img
                 alt="Customer avatar Sarah Newman"
                 className="w-20 h-20 rounded-full border-2 border-primary mx-auto"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5SPdVtbFa32RZtw1iI2U28jevt21MNfztnjfq9cq16KgzSGavA_iIsyO5Ug2kj6P-8EkM7xyrMfC24jEi1-1F2TNjwi3M-98p4ABDC_bN4hmVG9hpmvG7Ysl70uK1LuF9bC09ixлXbls8mjy-Xe_qTU4C__f_M_vGE-AZjsVOjNJPt_vkmZjYVuofI2fUKrfoxF6X5VTaHFainmIBkoWMooBKzirGDYgiYOASt_6gTKjzSv89IhW9A7C6yo33ZycumpZubprX0Bch"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5SPdVtbFa32RZtw1iI2U28jevt21MNfztnjfq9cq16KgzSGavA_iIsyO5Ug2kj6P-8EkM7xyrMfC24jEi1-1F2TNjwi3M-98p4ABDC_bN4hmVG9hpmvG7Ysl70uK1LuF9bC09ixlXbls8mjy-Xe_qTU4C__f_M_vGE-AZjsVOjNJPt_vkmZjYVuofI2fUKrfoxF6X5VTaHFainmIBkoWMooBKzirGDYgiYOASt_6gTKjzSv89IhW9A7C6yo33ZycumpZubprX0Bch"
               />
               <p className="font-semibold mt-2">Sarah Newman</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Ceo at Company
-              </p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Ceo at Company</p>
             </div>
             <img
               alt="Customer avatar"
               className="w-16 h-16 rounded-full opacity-50"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXaotdfhF_dmdlDKilttpxOsQjn8hQQx-WwK6781tqujJDSLG17msiqfHofgr3os-dB-dYv-bS-exAqnorIgY5lAutPUxFXTCЗ6jbAWvyw-kssciksNQ8kFBytuVVp5spxryfc8Dox7-jt05MqpgE-XURЗB4EsIruG2i_EXzFHXoO3GQqbNZlvZd3qCWNF8Dai5V5E3TAFe6vHMCDE8fd7wx7gTpOXtrKOjUNWyE30Zz1S8Sr_3zqEj6PKMOba7QfuZ1_I-nyAbLzk"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXaotdfhF_dmdlDKilttpxOsQjn8hQQx-WwK6781tqujJDSLG17msiqfHofgr3os-dB-dYv-bS-exAqnorIgY5lAutPUxFXTCZ6jbAWvyw-kssciksNQ8kFBytuVVp5spxryfc8Dox7-jt05MqpgE-XURZB4EsIruG2i_EXzFHXoO3GQqbNZlvZd3qCWNF8Dai5V5E3TAFe6vHMCDE8fd7wx7gTpOXtrKOjUNWyE30Zz1S8Sr_3zqEj6PKMOba7QfuZ1_I-nyAbLzk"
             />
             <img
               alt="Customer avatar"
               className="w-12 h-12 rounded-full opacity-50"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxhM0pnNmзGHEgXYMxhtdb95zSTEcrbIqKkxvNXHtjzNry0Ja9PVVgkVYk_1K8tRGEZMlMqrmG3l0FnWj6uA3cmv3gybkM2QA_Pr7Zlt2jMwkCPнBEezAgIjulqq2t3eYHAH8OHOAdgA6nUj9cD5h4gdPL2H4HTmiY-A0Aa6CQxefk5mgFyzk1g-9lcql0n_e426IDzRcbo0TDqsSeЗ_haEuElBzCPhtYp9Qn7w5zO1U9yGJeV3MEQKRBp0fCr9CiZOnZvNmaVwp2o"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxhM0pnNmzGHEgXYMxhtdb95zSTEcrbIqKkxvNXHtjzNry0Ja9PVVgkVYk_1K8tRGEZMlMqrmG3l0FnWj6uA3cmv3gybkM2QA_Pr7Zlt2jMwkCPnBEezAgIjulqq2t3eYHAH8OHOAdgA6nUj9cD5h4gdPL2H4HTmiY-A0Aa6CQxefk5mgFyzk1g-9lcql0n_e426IDzRcbo0TDqsSeZ_haEuElBzCPhtYp9Qn7w5zO1U9yGJeV3MEQKRBp0fCr9CiZOnZvNmaVwp2o"
             />
             <button className="p-2 rounded-full border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
               <span className="material-icons">arrow_forward</span>
             </button>
           </div>
           <p className="mt-8 max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300">
-            "This creative agency stands out with their exceptional talent. The
-            team's deep understanding of branding and design transformed our
-            vision into a stunning reality. From their strategic insights to
-            their meticulous attention to detail, they consistently deliver
-            visually stunning and impactful results."
+            &quot;This creative agency stands out with their exceptional talent. The
+            team&apos;s deep understanding of branding and design transformed our
+            vision into a stunning reality. From their strategic insights to their
+            meticulous attention to detail, they consistently deliver visually
+            stunning and impactful results.&quot;
           </p>
         </div>
       </section>
@@ -310,22 +299,19 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-background-light dark:bg-background-dark rounded-lg overflow-hidden shadow-md transform hover:-translate-y-2 transition-transform duration-300">
               <img
-                alt="Desk with design tools"
+                alt="Desk with design tools and a laptop"
                 className="w-full h-64 object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjmJb-pU2EYK4d-KwuFsMXJc_xnHolRELAYWXnCNZ4M8reEbFVT_sWRjDGt1LQ8V6ЗrywclNPjgRg1F5ha7Jz6QlBGdRohIbK6vJK7MBvb60SsBe1EZ0tqIPUJKSsBXJX8nc6cSwOYxPLJqx8t0Ha-QQaRBkZVUr3Ii_-hbcu3KhwnTW5pYTdpC4E68z1Ks-T2mtBLQLvUF2zr4eWflGGTHzsgOCVUDVJDOHUY3g__EtBXLn-zCza1L1iiDMZLYx2V6CdH6vQXRyI7"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjmJb-pU2EYK4d-KwuFsMXJc_xnHolRELAYWXnCNZ4M8reEbFVT_sWRjDGt1LQ8V6ZrywclNPjgRg1F5ha7Jz6QlBGdRohIbK6vJK7MBvb60SsBe1EZ0tqIPUJKSsBXJX8nc6cSwOYxPLJqx8t0Ha-QQaRBkZVUr3Ii_-hbcu3KhwnTW5pYTdpC4E68z1Ks-T2mtBLQLvUF2zr4eWflGGTHzsgOCVUDVJDOHUY3g__EtBXLn-zCza1L1iiDMZLYx2V6CdH6vQXRyI7"
               />
               <div className="p-6">
                 <h3 className="text-xl font-semibold">
                   How to Become a Graphic Designer in 10 Simple Steps
                 </h3>
                 <p className="mt-2 text-gray-600 dark:text-gray-400">
-                  Unlock your creative potential with our comprehensive guide.
-                  From mastering...
+                  Unlock your creative potential with our comprehensive guide. From
+                  mastering...
                 </p>
-                <a
-                  className="mt-4 inline-flex items-center font-semibold text-primary"
-                  href="#"
-                >
+                <a className="mt-4 inline-flex items-center font-semibold text-primary" href="#">
                   READ MORE
                   <span className="material-icons ml-1">arrow_forward</span>
                 </a>
@@ -333,22 +319,19 @@ export default function Home() {
             </div>
             <div className="bg-background-light dark:bg-background-dark rounded-lg overflow-hidden shadow-md transform hover:-translate-y-2 transition-transform duration-300">
               <img
-                alt="Person working on laptop"
+                alt="Person working on a laptop with design software"
                 className="w-full h-64 object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvswCun9LX4Pxt5UJn89npEwSMhzЗLMSPVFLOFvYnm4AkFKpPHDxxEB8CqRniZyd0bVeqptxhDglEuF4QpZlyZuq-2rMUNbHzPR4sOzLN9pvetztnY2Ci9NOIe2osJvYriewkqchjmQANQZwo-Ym2apygYeCCoEpXgWKdg_PEV9KkDNVC4TSUFkNlGPqVPUn5zrS51m1jg0VIVQ5_R6DkDBCX3QSu7tvo0PaeJxiGTuzyI3vn1_dA7i1xoJtUXcO30k8g9kJPhOZ1i"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvswCun9LX4Pxt5UJn89npEwSMhzZLMSPVFLOFvYnm4AkFKpPHDxxEB8CqRniZyd0bVeqptxhDglEuF4QpZlyZuq-2rMUNbHzPR4sOzLN9pvetztnY2Ci9NOIe2osJvYriewkqchjmQANQZwo-Ym2apygYeCCoEpXgWKdg_PEV9KkDNVC4TSUFkNlGPqVPUn5zrS51m1jg0VIVQ5_R6DkDBCX3QSu7tvo0PaeJxiGTuzyI3vn1_dA7i1xoJtUXcO30k8kJPhOZ1i"
               />
               <div className="p-6">
                 <h3 className="text-xl font-semibold">
                   15 Best Graphic Design Online and Offline Courses
                 </h3>
                 <p className="mt-2 text-gray-600 dark:text-gray-400">
-                  Discover top-rated courses to advance your skills, curated by
-                  industry experts to help...
+                  Discover top-rated courses to advance your skills, curated by industry
+                  experts to help...
                 </p>
-                <a
-                  className="mt-4 inline-flex items-center font-semibold text-primary"
-                  href="#"
-                >
+                <a className="mt-4 inline-flex items-center font-semibold text-primary" href="#">
                   READ MORE
                   <span className="material-icons ml-1">arrow_forward</span>
                 </a>
@@ -416,7 +399,7 @@ export default function Home() {
             </div>
             <div>
               <h4 className="font-semibold text-lg mb-4">Contact Us</h4>
-              <p>Need more information? Let's get in touch.</p>
+              <p>Need more information? Let&apos;s get in touch.</p>
               <button className="mt-4 bg-primary text-black px-6 py-2 rounded-full font-semibold flex items-center gap-2">
                 CONTACT US
                 <span className="material-icons">arrow_forward</span>
