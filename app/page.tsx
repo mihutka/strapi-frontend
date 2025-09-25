@@ -10,7 +10,7 @@ export default function Home() {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        const title = data?.data?.[0]?.attributes?.title;
+         const title = data?.data?.[0]?.title; // без attributes
         setHeroTitle(title || "No title found");
       })
       .catch(() => setHeroTitle("Error loading title"));
